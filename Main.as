@@ -1,25 +1,27 @@
-[Setting]
-string Sign4x1 = "https://trackmania-prod-nls-file-store-s3.cdn.ubi.com/club/decal_sponsor_4x1/18618/63235e74e375c.png?updateTimestamp=1663262327.png";
-
-[Setting description="Currently does not seem to work"]
-string Sign2x1 = "https://trackmania-prod-nls-file-store-s3.cdn.ubi.com/club/vertical/18618/632e9902e84c8.png?updateTimestamp=1663998215.png";
-
-[Setting]
+[Setting name="Bigass 16x9 stadium sign"]
 string Sign16x9 = "https://trackmania-prod-nls-file-store-s3.cdn.ubi.com/club/screen_16x9/18618/63235f0b11c38.dds?updateTimestamp=1663262476.dds";
 
-[Setting]
+[Setting name="Square club decal under checkpoints"]
+string SignClubLogo = "https://trackmania-prod-nls-file-store-s3.cdn.ubi.com/club/decal/18618/63133d19a3627.png?updateTimestamp=1662205213.png";
+
+[Setting name="4x1 'sponsor' Decal (checkpoints and spectator stands usually)"]
+string Sign4x1 = "https://trackmania-prod-nls-file-store-s3.cdn.ubi.com/club/decal_sponsor_4x1/18618/63235e74e375c.png?updateTimestamp=1663262327.png";
+
+[Setting name="Vertical stadium sign with 'TRACK MAN'" description="Currently doesnt work, idk :("]
+string Sign2x1 = "https://trackmania-prod-nls-file-store-s3.cdn.ubi.com/club/vertical/18618/632e9902e84c8.png?updateTimestamp=1663998215.png";
+
+[Setting name="8x1 grandstands sign"]
 string Sign8x1 = "https://trackmania-prod-nls-file-store-s3.cdn.ubi.com/club/screen_8x1/18618/63235fce1bcee.dds?updateTimestamp=1663262671.dds";
 
-[Setting]
+[Setting name="16x1 strip under the bigass sign"]
 string Sign16x1 = "https://trackmania-prod-nls-file-store-s3.cdn.ubi.com/club/screen_16x1/18618/63235e680fdad.dds?updateTimestamp=1663262313.dds";
 
-[Setting]
-string SignClubLogo = "https://trackmania-prod-nls-file-store-s3.cdn.ubi.com/club/decal/18618/63133d19a3627.png?updateTimestamp=1662205213.png";
+[Setting name="Set from Club" hidden]
+uint64 idClub = 18618;
 
 [SettingsTab name="Set from Club"]
 void SettingsTabSetFromClubID() {
 	UI::Text("This is experimental, it might be better to slurp the values from tm.io and set them urself...");
-	uint64 idClub = 18618;
 	
 	idClub = UI::InputInt("Club ID", idClub);
 	if (UI::Button("Fetch resources")) {
@@ -28,6 +30,7 @@ void SettingsTabSetFromClubID() {
 }
 
 void saveClubAssets(uint64 idClub) {
+	trace("fetching club asset URLs...");
 	NadeoServices::AddAudience("NadeoLiveServices");
 	while (!NadeoServices::IsAuthenticated("NadeoLiveServices")) yield();
 
@@ -57,6 +60,7 @@ void saveClubAssets(uint64 idClub) {
 string currentMapUid;
 
 void Main() {
+	startnew(saveClubAssets, idClub);
 	while (true) {
 	    CTrackMania@ app = cast<CTrackMania>(GetApp());
 
@@ -104,4 +108,6 @@ void OnNewMap() {
 	if (SignClubLogo != "") {
 		ps.SetClubLogoUrl(SignClubLogo);
 	}
+
+	trace("overrided stadium signs :)");
 }
