@@ -56,12 +56,18 @@ main() {
 
     void AddMLPagesToManiaApp(CGameManiaApp@ ma) {
         if (ma.UILayers.Length < 2) yield();
-        CreateOrUpdateMLPage(ma, GenQuad(Sign64x10, 320, 50), "64x10_Checkpoint");
-        CreateOrUpdateMLPage(ma, GenQuad(Sign64x10, 320, 50), "64x10_Finish");
-        CreateOrUpdateMLPage(ma, GenQuad(Sign64x10, 320, 50), "64x10_Start");
-        CreateOrUpdateMLPage(ma, GenQuad(Sign2x3, 120, 180), "2x3_Stadium");
-        CreateOrUpdateMLPage(ma, GenQuad(Sign16x9, 320, 180), "16x9_Stadium");
-        CreateOrUpdateMLPage(ma, GenQuad(Sign16x9, 320, 180), "16x9_StadiumSmall");
+        if (Sign64x10 != "") {
+            CreateOrUpdateMLPage(ma, GenQuad(Sign64x10, 320, 50), "64x10_Checkpoint");
+            CreateOrUpdateMLPage(ma, GenQuad(Sign64x10, 320, 50), "64x10_Finish");
+            CreateOrUpdateMLPage(ma, GenQuad(Sign64x10, 320, 50), "64x10_Start");
+        }
+        if (Sign2x3 != "") {
+            CreateOrUpdateMLPage(ma, GenQuad(Sign2x3, 120, 180), "2x3_Stadium");
+        }
+        if (Sign16x9 != "") {
+            CreateOrUpdateMLPage(ma, GenQuad(Sign16x9, 320, 180), "16x9_Stadium");
+            CreateOrUpdateMLPage(ma, GenQuad(Sign16x9, 320, 180), "16x9_StadiumSmall");
+        }
     }
 
     CGameUILayer@ CreateOrUpdateMLPage(CGameManiaApp@ ma, const string &in pageSrc, const string &in attachId = "") {
