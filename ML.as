@@ -43,13 +43,23 @@ main() {
     void OnEnterPlayground() {
         while (GetApp().Network.ClientManiaAppPlayground is null) yield();
         auto cmap = GetApp().Network.ClientManiaAppPlayground;
-        while (cmap.UILayers.Length < 2) yield();
-        CreateOrUpdateMLPage(cmap, GenQuad(Sign64x10, 320, 50), "64x10_Checkpoint");
-        CreateOrUpdateMLPage(cmap, GenQuad(Sign64x10, 320, 50), "64x10_Finish");
-        CreateOrUpdateMLPage(cmap, GenQuad(Sign64x10, 320, 50), "64x10_Start");
-        CreateOrUpdateMLPage(cmap, GenQuad(Sign2x3, 120, 180), "2x3_Stadium");
-        CreateOrUpdateMLPage(cmap, GenQuad(Sign16x9, 320, 180), "16x9_Stadium");
-        CreateOrUpdateMLPage(cmap, GenQuad(Sign16x9, 320, 180), "16x9_StadiumSmall");
+        AddMLPagesToManiaApp(cmap);
+    }
+
+    void OnEnterEditor() {
+        while (cast<CGameCtnEditorFree>(GetApp().Editor) is null) yield();
+        auto editor = cast<CGameCtnEditorFree>(GetApp().Editor);
+        AddMLPagesToManiaApp(editor.PluginMapType);
+    }
+
+    void AddMLPagesToManiaApp(CGameManiaApp@ ma) {
+        if (ma.UILayers.Length < 2) yield();
+        CreateOrUpdateMLPage(ma, GenQuad(Sign64x10, 320, 50), "64x10_Checkpoint");
+        CreateOrUpdateMLPage(ma, GenQuad(Sign64x10, 320, 50), "64x10_Finish");
+        CreateOrUpdateMLPage(ma, GenQuad(Sign64x10, 320, 50), "64x10_Start");
+        CreateOrUpdateMLPage(ma, GenQuad(Sign2x3, 120, 180), "2x3_Stadium");
+        CreateOrUpdateMLPage(ma, GenQuad(Sign16x9, 320, 180), "16x9_Stadium");
+        CreateOrUpdateMLPage(ma, GenQuad(Sign16x9, 320, 180), "16x9_StadiumSmall");
     }
 
     CGameUILayer@ CreateOrUpdateMLPage(CGameManiaApp@ ma, const string &in pageSrc, const string &in attachId = "") {

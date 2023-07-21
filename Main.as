@@ -67,11 +67,12 @@ string currentMapUid;
 
 void Main() {
 	startnew(saveClubAssets, idClub);
+	startnew(WatchForEditorPg);
 	while (true) {
 	    CTrackMania@ app = cast<CTrackMania>(GetApp());
 
     	string mapUid;
-        if (app.RootMap is null || !app.RootMap.MapInfo.IsPlayable || app.Editor !is null) {
+        if (app.RootMap is null) { // || !app.RootMap.MapInfo.IsPlayable || app.Editor !is null) {
     	    mapUid = "";
     	} else {
 	        mapUid = app.RootMap.MapInfo.MapUid;
@@ -85,8 +86,24 @@ void Main() {
 	}
 }
 
+void WatchForEditorPg() {
+	bool lastEditor = false;
+	while (true) {
+		yield();
+		while (cast<CGameCtnEditorFree>(GetApp().Editor) is null) yield();
+		while (cast<CGameCtnEditorFree>(GetApp().Editor) !is null && GetApp().CurrentPlayground is null) yield();
+		if (GetApp().CurrentPlayground !is null) {
+			startnew(ML::OnEnterPlayground);
+		}
+		while (GetApp().CurrentPlayground !is null) yield();
+	}
+}
+
 void OnNewMap() {
 	startnew(ML::OnEnterPlayground);
+	if (cast<CGameCtnEditorFree>(GetApp().Editor) !is null) {
+		startnew(ML::OnEnterEditor);
+	}
 
 	auto ps = cast<CSmArenaRulesMode@>(GetApp().PlaygroundScript);
 
