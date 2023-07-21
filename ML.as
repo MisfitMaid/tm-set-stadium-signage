@@ -41,15 +41,17 @@ main() {
     }
 
     void OnEnterPlayground() {
-        while (GetApp().Network.ClientManiaAppPlayground is null) yield();
+        if (GetApp().Network.ClientManiaAppPlayground is null) return;
         auto cmap = GetApp().Network.ClientManiaAppPlayground;
         AddMLPagesToManiaApp(cmap);
     }
 
     void OnEnterEditor() {
-        while (cast<CGameCtnEditorFree>(GetApp().Editor) is null) yield();
-        auto editor = cast<CGameCtnEditorFree>(GetApp().Editor);
-        AddMLPagesToManiaApp(editor.PluginMapType);
+        // Doesn't work / do anything
+        // while (cast<CGameCtnEditorFree>(GetApp().Editor) is null) yield();
+        // auto editor = cast<CGameCtnEditorFree>(GetApp().Editor);
+        // AddMLPagesToManiaApp(editor.PluginMapType);
+        // AddMLPagesToManiaApp(editor.MainPLugin);
     }
 
     void AddMLPagesToManiaApp(CGameManiaApp@ ma) {

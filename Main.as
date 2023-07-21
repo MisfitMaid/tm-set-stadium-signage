@@ -87,15 +87,16 @@ void Main() {
 }
 
 void WatchForEditorPg() {
-	bool lastEditor = false;
 	while (true) {
 		yield();
 		while (cast<CGameCtnEditorFree>(GetApp().Editor) is null) yield();
 		while (cast<CGameCtnEditorFree>(GetApp().Editor) !is null && GetApp().CurrentPlayground is null) yield();
 		if (GetApp().CurrentPlayground !is null) {
-			startnew(ML::OnEnterPlayground);
+			startnew(OnNewMap);
 		}
 		while (GetApp().CurrentPlayground !is null) yield();
+		// might need to reset deco when going from PG -> Editor
+		startnew(OnNewMap);
 	}
 }
 
