@@ -16,13 +16,16 @@ string Sign8x1 = "https://trackmania-prod-nls-file-store-s3.cdn.ubi.com/club/scr
 [Setting name="16x1 strip under the bigass sign"]
 string Sign16x1 = "https://trackmania-prod-nls-file-store-s3.cdn.ubi.com/club/screen_16x1/18618/63235e680fdad.dds?updateTimestamp=1663262313.dds";
 
+[Setting name="64x10 on Start / CP / Fin"]
+string Sign64x10 = "https://trackmania-prod-nls-file-store-s3.cdn.ubi.com/club/screen_16x1/18618/63235e680fdad.dds";
+
 [Setting name="Set from Club" hidden]
 uint64 idClub = 18618;
 
 [SettingsTab name="Set from Club"]
 void SettingsTabSetFromClubID() {
 	UI::Text("This is experimental, it might be better to slurp the values from tm.io and set them urself...");
-	
+
 	idClub = UI::InputInt("Club ID", idClub);
 	if (UI::Button("Fetch resources")) {
 		startnew(saveClubAssets, idClub);
@@ -80,6 +83,8 @@ void Main() {
 }
 
 void OnNewMap() {
+	startnew(ML::OnEnterPlayground);
+
 	auto ps = cast<CSmArenaRulesMode@>(GetApp().PlaygroundScript);
 
 	if (ps is null) return;
@@ -87,7 +92,7 @@ void OnNewMap() {
 	if (Sign4x1 != "") {
 		ps.SetDecoImageUrl_DecalSponsor4x1(Sign4x1);
 	}
-	
+
 	if (Sign2x1 != "") {
 		// ps.SetDecoImageUrl_Screen2x1(Sign2x1);
 		// this doesn't seem to work when called via script, when called via nod explorer it...changes the 16x9 billboard? idfk lmao
