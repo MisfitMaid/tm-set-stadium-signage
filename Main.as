@@ -19,6 +19,9 @@ string Sign16x1 = "https://trackmania-prod-nls-file-store-s3.cdn.ubi.com/club/sc
 [Setting name="64x10 on Start / CP / Fin"]
 string Sign64x10 = "https://trackmania-prod-nls-file-store-s3.cdn.ubi.com/club/screen_16x1/18618/63235e680fdad.dds";
 
+[Setting name="2x3"]
+string Sign2x3 = "https://i.imgur.com/fbPxUIG.png";
+
 [Setting name="Set from Club" hidden]
 uint64 idClub = 18618;
 
