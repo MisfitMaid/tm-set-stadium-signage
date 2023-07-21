@@ -3,40 +3,13 @@ namespace ML {
     const string quadTemplate = """
 <frame id="frame-global" z-index="-2" hidden="0">
     <quad id="quad-sign" image=":url" size=":size_x :size_y" z-index="0" halign="center" valign="center" bgcolor="000000" />
-    <label text=":label_text" size=":size_x :size_y" opacity="1" textsize=":l_textsize" textcolor="ffffffff" textemboss="1" halign="center" valign="center" />
 </frame>
-
-<script><!--
-main() {
-    yield;
-
-    declare Quad_Sign <=> (Page.GetFirstChild("quad-sign") as CMlQuad);
-    declare origUrl = Quad_Sign.ImageUrl;
-    // declare secondUrl = "https:/"^"/i.imgur.com/VP9V8Ya.jpeg";
-    declare secondUrl = "https:/"^"/i.imgur.com/cVsYOXy.png";
-
-    declare Integer lastRun = Now;
-
-    while (True) {
-        yield;
-        if (Now - lastRun > 30000 && :swap_urls_bool) {
-            Quad_Sign.ImageUrl = secondUrl;
-            secondUrl = origUrl;
-            origUrl = Quad_Sign.ImageUrl;
-            lastRun = Now;
-        }
-    }
-}
---></script>
 """;
 
-    string GenQuad(const string &in url, float size_x = 320, float size_y = 50, const string &in labelText = "This pleases you?") {
+    string GenQuad(const string &in url, float size_x = 320, float size_y = 50) {
         return quadTemplate.Replace(':url', url)
             .Replace(":size_x", tostring(size_x))
             .Replace(":size_y", tostring(size_y))
-            .Replace(":label_text", labelText)
-            .Replace(":l_textsize", tostring(size_x / float(labelText.Length) * 1.8))
-            .Replace(":swap_urls_bool", (size_x == 120 && size_y == 180) ? "True" : "False")
             ;
     }
 
