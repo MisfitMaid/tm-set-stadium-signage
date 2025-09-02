@@ -38,8 +38,8 @@ namespace ML {
             CreateOrUpdateMLPage(ma, GenQuad(Sign2x3, 120, 180), "2x3_Stadium");
         }
         if (Sign16x9 != "") {
-            CreateOrUpdateMLPage(ma, GenQuad(Sign16x9, 320, 180), "16x9_Stadium");
-            CreateOrUpdateMLPage(ma, GenQuad(Sign16x9, 320, 180), "16x9_StadiumSmall");
+            CreateOrUpdateMLPage(ma, GenQuad(Sign16x9, 320, 180), "155_Stadium");
+            CreateOrUpdateMLPage(ma, GenQuad(Sign16x9, 320, 180), "155_StadiumSmall");
         }
     }
 
