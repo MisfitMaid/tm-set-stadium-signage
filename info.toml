@@ -2,7 +2,7 @@
 name = "Set Stadium Signage"
 author = "MisfitMaid, XertroV"
 category = "Utilities"
-version = "0.2"
+version = "0.3"
 
 [script]
-dependencies = [ "NadeoServices" ]
+dependencies = ["NadeoServices"]

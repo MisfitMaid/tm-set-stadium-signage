@@ -19,6 +19,10 @@ string Sign16x1 = "https://misfitmaid.github.io/tm-set-stadium-signage/img/defau
 [Setting name="64x10 on Start / CP / Fin"]
 string Sign64x10 = "https://misfitmaid.github.io/tm-set-stadium-signage/img/defaults/64x10.png";
 
+[Setting name="Perform ML Injection" description="Required for server support. Disable this if you experience CTDs on certain servers."]
+bool doML = true;
+
+
 [Setting name="Set from Club" hidden]
 uint64 idClub = 18618;
 

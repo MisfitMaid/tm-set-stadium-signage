@@ -28,7 +28,8 @@ namespace ML {
     }
 
     void AddMLPagesToManiaApp(CGameManiaApp@ ma) {
-        if (ma.UILayers.Length < 2) yield();
+        if (!doML) return;
+        while (ma.UILayers.Length < 2) yield();
         if (Sign64x10 != "") {
             CreateOrUpdateMLPage(ma, GenQuad(Sign64x10, 320, 50), "64x10_Checkpoint");
             CreateOrUpdateMLPage(ma, GenQuad(Sign64x10, 320, 50), "64x10_Finish");
