@@ -1,4 +1,4 @@
-[Setting name="Bigass 16x9 stadium sign"]
+[Setting name="Big 64x41 stadium sign"]
 string Sign16x9 = "https://misfitmaid.github.io/tm-set-stadium-signage/img/defaults/16x9.dds";
 
 [Setting name="Square club decal under checkpoints"]
@@ -13,7 +13,7 @@ string Sign2x3 = "https://misfitmaid.github.io/tm-set-stadium-signage/img/defaul
 [Setting name="8x1 grandstands sign"]
 string Sign8x1 = "https://misfitmaid.github.io/tm-set-stadium-signage/img/defaults/8x1.dds";
 
-[Setting name="16x1 strip under the bigass sign"]
+[Setting name="16x1 strip under the big sign"]
 string Sign16x1 = "https://misfitmaid.github.io/tm-set-stadium-signage/img/defaults/16x1.dds";
 
 [Setting name="64x10 on Start / CP / Fin"]
